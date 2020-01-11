@@ -11,6 +11,8 @@ using System.Windows;
 using mascot.Models;
 using mascot.Views;
 using mascot.ViewModels;
+using Prism.Services.Dialogs;
+using Prism.Regions;
 
 namespace mascot
 {
@@ -27,6 +29,10 @@ namespace mascot
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.Register<IFileOpenService, FileOpenService>();
+            containerRegistry.RegisterDialog<MascotWindow>(nameof(MascotWindow));
+
+            // 透過ダイアログに変更
+            containerRegistry.RegisterDialogWindow<TransmissionWindow>();
         }
 
         protected override void ConfigureViewModelLocator()
@@ -34,6 +40,7 @@ namespace mascot
             base.ConfigureViewModelLocator();
             ViewModelLocationProvider.Register<MainWindow, MainWindowViewModel>();
             ViewModelLocationProvider.Register<browseButton, browseButtonViewModel>();
+            ViewModelLocationProvider.Register<MascotWindow, MascotWindowViewModel>();
         }
     }
 }
